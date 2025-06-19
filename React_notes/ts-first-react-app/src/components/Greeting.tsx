@@ -1,17 +1,16 @@
-// Greeting.tsx
 import React from 'react';
 
-// Propsの型定義 (TypeScriptの重要な部分)
 interface GreetingProps {
   name: string;
-  message?: string; // オプショナルなプロパティ
+  message: string;
 }
 
-const Greeting: React.FC<GreetingProps> = ({ name, message }) => {
+const Greeting: React.FC<GreetingProps> = ({ name, message = "How can I help you today?"}) => {
   return (
-    <div>
+    <div style={{ border: '1px solid #ccc', padding: '10px', margin: '10px', borderRadius: '5px' }}>
       <h2>Hello, {name}!</h2>
-      {message && <p>{message}</p>} {/* messageが存在すれば表示 */}
+      <p>{message}</p>
+      <p>This is a reusable Greeting component.</p>
     </div>
   );
 };
