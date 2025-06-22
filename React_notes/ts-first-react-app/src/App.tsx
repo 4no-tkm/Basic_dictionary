@@ -1,15 +1,13 @@
 import React, { useState, useEffect  } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import Greeting from './components/Greeting'; 
-import Counter from './components/Counter';
-import TextInput from './components/TextInput';
 import UserContext from './contexts/UserContext';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import NotFoundPage from './pages/NotFoundPage';
 import UserList from './pages/UserList';
+import TodoListPage from './pages/TodoListPage';
 
 function App() {
   const currentHour = new Date().getHours();
@@ -39,6 +37,7 @@ function App() {
             <Link to="/" style={{ marginRight: '15px', textDecoration: 'none', color: '#007bff', fontWeight: 'bold' }}>Home</Link>
             <Link to="/about" style={{ marginRight: '15px', textDecoration: 'none', color: '#28a745', fontWeight: 'bold' }}>About</Link>
             <Link to="/users" style={{ marginRight: '15px', textDecoration: 'none', color: '#663399', fontWeight: 'bold' }}>Users</Link>
+            <Link to="/todos" style={{ marginRight: '15px', textDecoration: 'none', color: '#ff5722', fontWeight: 'bold' }}>Todos</Link>
             <Link to="/non-existent-page" style={{ textDecoration: 'none', color: '#dc3545', fontWeight: 'bold' }}>Invalid Page</Link>
           </nav>
 
@@ -48,6 +47,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/users" element={<UserList />} />
+            <Route path="/todos" element={<TodoListPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
 
