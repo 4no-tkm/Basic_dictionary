@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-
-export interface Todo {
-    id: string;
-    text: string;
-    completed: boolean;
-}
+import TodoItem from '../components/TodoItem';
+import type { Todo } from '../types/todo';
 
 const TodoListPage: React.FC = () => {
     const [todos, setTodos] = useState<Todo[]>([]);
@@ -23,6 +19,18 @@ const TodoListPage: React.FC = () => {
         };
         setTodos((prevTodos) => [...prevTodos, newTodo]);
         setNewTodoText('');
+    };
+
+    const handleToggleComplete = (id: string) => {
+      setTodos((prevTodos) => 
+        prevTodos.map((todo) =>
+          todo.id === id ? { ...todo, completed: !todo.completed} : todo
+        )
+      );
+    };
+
+    const handleDeleteTodo = (id: string) => {
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
     };
 
     return (
@@ -47,17 +55,12 @@ const TodoListPage: React.FC = () => {
           <p style={{ textAlign: 'center', color: '#666' }}>No to-dos yet. Let's add it!</p>
         ) : (
           todos.map((todo) => (
-            <li key={todo.id} style={{ 
-              padding: '10px', 
-              borderBottom: '1px solid #eee', 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: 'center',
-              textDecoration: todo.completed ? 'line-through' : 'none',
-              color: todo.completed ? '#aaa' : '#333'
-            }}>
-              <span>{todo.text}</span>
-            </li>
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              onToggleComplete={handleToggleComplete} // 親から子へ関数をPropsとして渡す
+              onDelete={handleDeleteTodo}             // 親から子へ関数をPropsとして渡す
+            />
           ))
         )}
       </ul>
