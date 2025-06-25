@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoItem from '../components/TodoItem';
 import type { Todo } from '../types/todo';
 
 const TodoListPage: React.FC = () => {
-    const [todos, setTodos] = useState<Todo[]>([]);
+    const [todos, setTodos] = useState<Todo[]>(() => {
+      const savedTodos = localStorage.getItem('todos');
+      return savedTodos ? JSON.parse(savedTodos) : [];
+    });
     const [newTodoText, setNewTodoText] = useState<string>('');
+
+    useEffect(() => {
+      localStorage.setItem('todos', JSON.stringify(todos));
+      console.log('Todos saved to localStorage:', todos);
+    }, [todos]);
 
     const handleAddTodo = (e: React.FormEvent) => {
         e.preventDefault();
