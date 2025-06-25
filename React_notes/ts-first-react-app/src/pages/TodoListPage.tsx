@@ -41,9 +41,25 @@ const TodoListPage: React.FC = () => {
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
     };
 
+    const totalTodos = todos.length;
+    const completedTodos = todos.filter(todo => todo.completed).length;
+    const remainingTodos = totalTodos - completedTodos;
+
+    const sortedTodos = [...todos].sort((a, b) => {
+      if (a.completed && !b.completed) return 1;
+      if (!a.completed && b.completed) return -1;
+      return a.id.localeCompare(b.id);
+    });
+
     return (
         <div style={{ padding: '20px', border: '1px solid #ff5722', borderRadius: '8px' }}>
       <h2>My ToDo List</h2>
+
+      <div style={{ marginBottom: '15px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '5px', display: 'flex', justifyContent: 'space-around' }}>
+        <p style={{ margin: 0 }}>Total: <strong>{totalTodos}</strong></p>
+        <p style={{ margin: 0 }}>Completed: <strong style={{ color: '#28a745' }}>{completedTodos}</strong></p>
+        <p style={{ margin: 0 }}>Remaining: <strong style={{ color: '#dc3545' }}>{remainingTodos}</strong></p>
+      </div>
 
       <form onSubmit={handleAddTodo} style={{ marginBottom: '20px' }}>
         <input
