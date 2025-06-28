@@ -134,3 +134,19 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Rails practice specific ignores
+/Rails_notes/rails_practice_api/.bundle
+/Rails_notes/rails_practice_api/db/*.sqlite3
+/Rails_notes/rails_practice_api/db/*.sqlite3-journal
+/Rails_notes/rails_practice_api/log/*.log
+/Rails_notes/rails_practice_api/tmp/
+/Rails_notes/rails_practice_api/public/assets
+/Rails_notes/rails_practice_api/.byebug_history
+/Rails_notes/rails_practice_api/.foreman
+/Rails_notes/rails_practice_api/coverage/
+/Rails_notes/rails_practice_api/*.gem
+/Rails_notes/rails_practice_api/spec/tmp
+/Rails_notes/rails_practice_api/.spring.watch
+/Rails_notes/rails_practice_api/config/master.key
+/Rails_notes/rails_practice_api/storage/
