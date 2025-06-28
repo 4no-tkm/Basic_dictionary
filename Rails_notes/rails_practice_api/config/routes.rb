@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "/hello", to: "greetings#index"
+
+  resources :items
 end
